@@ -1,0 +1,11 @@
+---
+  - name: Create a new database with name 'bobdata'
+    mysql_db:
+      name: '{{magento_database_name}}'
+      state: present
+
+  - mysql_user:
+      name: '{{magento_user_name}}'bob
+      password: '{{magento_user_password}}'
+      priv: '{{magento_database_name}}.*:ALL'
+      state: present

@@ -1,0 +1,4 @@
+---
+magento_database_name: 'magento'
+magento_user_name: 'magento'
+magento_user_password: 'magento'
