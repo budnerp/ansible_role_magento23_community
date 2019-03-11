@@ -1,4 +1,9 @@
 ---
+# Database non-prod credentials
 magento_database_name: 'magento'
 magento_user_name: 'magento'
 magento_user_password: 'magento'
+
+#magento_user_host: '192.168.33.10'
+magento_user_host_ip: '{{ansible_eth1.ipv4.address}}'
+
