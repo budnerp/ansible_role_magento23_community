@@ -1,1 +1,27 @@
 ---
+  - yum:
+      name: http://widehat.opensuse.org/opensuse/distribution/leap/42.3/repo/oss/suse/noarch/python-pexpect-3.3-6.1.noarch.rpm
+      state: present
+  - yum:
+      name: python-pexpect
+      state: present
+
+  - name: MAGENTO 2.3 COMMUNITY - create Magento 2.3 project via Composer
+    expect:
+      command: /usr/local/bin/composer create-project --repository=https://repo.magento.com/ magento/project-community-edition {{ magento_docroot }}
+      responses:
+        (?i)Username: '{{magento_public_key}}'
+        (?i)Password: '{{magento_private_key}}'
+        (?i)Do you want to store credentials for repo.magento.com: 'y'
+      echo: yes
+    # no_log: true
+
+#  - name: MAGENTO 2.3 COMMUNITY - copy reinstall script /var/www/html/reinstall.sh
+#    template:
+#      src: var/www/html/reinstall.sh.j2
+#      dest: /var/www/html/reinstall.sh
+#      owner: apache
+#      group: apache
+#      mode: 0664
+
+  - shell: 'chmod u+x {{magento_docroot}}/bin/magento'

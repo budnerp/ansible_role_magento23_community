@@ -7,3 +7,13 @@ magento_user_password: 'magento'
 #magento_user_host: '192.168.33.10'
 magento_user_host_ip: '{{ansible_eth1.ipv4.address}}'
 
+# Magento docroot
+# On Apache servers most likely it's /var/www/html
+magento_docroot: '/var/www/html'
+magento_www_user: 'apache'
+magento_www_group: 'apache'
+
+# Authorization keys generated in Magento Marketplace offitial site
+# https://marketplace.magento.com/customer/accessKeys/
+magento_public_key: 'dd8f9291879fdc1fed7da25900a30bb3'
+magento_private_key: '05543f3c038be5b2f2697a30735cfbd6'

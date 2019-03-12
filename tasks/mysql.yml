@@ -1,10 +1,10 @@
 ---
-  - name: Create a new database with name '{{magento_database_name}}'
+  - name: MAGENTO 2.3 COMMUNITY - create a new database with name '{{magento_database_name}}'
     mysql_db:
       name: '{{magento_database_name}}'
       state: present
 
-  - name: Create '{{magento_user_name}}' user for '{{magento_database_name}}' database
+  - name: MAGENTO 2.3 COMMUNITY - create '{{magento_user_name}}' user for '{{magento_database_name}}' database
     mysql_user:
       name: '{{magento_user_name}}'
       password: '{{magento_user_password}}'
