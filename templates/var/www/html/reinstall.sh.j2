@@ -24,9 +24,9 @@ chmod 764 ./vendor/phpmd/phpmd/src/bin/phpmd
 # needed to run PHPUnit from commad line
 chmod 764 ./vendor/phpunit/phpunit/phpunit
 else
-echo "MAGENTO INSTALL/UPDATE"
+    echo "MAGENTO INSTALL/UPDATE"
 
-php70 bin/magento setup:upgrade
+    php70 bin/magento setup:upgrade
 fi
 php70 bin/magento setup:di:compile
 php70 bin/magento setup:static-content:deploy

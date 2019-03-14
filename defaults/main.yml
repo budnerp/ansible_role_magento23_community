@@ -13,7 +13,7 @@ magento_docroot: '/var/www/html'
 magento_www_user: 'apache'
 magento_www_group: 'apache'
 
-# Authorization keys generated in Magento Marketplace offitial site
+# Authorization keys generated in Magento Marketplace official site
 # https://marketplace.magento.com/customer/accessKeys/
 magento_public_key: 'dd8f9291879fdc1fed7da25900a30bb3'
 magento_private_key: '05543f3c038be5b2f2697a30735cfbd6'

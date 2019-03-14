@@ -80,6 +80,7 @@ Ansible role for Magento 2.3 Community
 ## Other links
 - Magento 2 [https://devdocs.magento.com/#/individual-contributors]()
 - Magento 2 - MySQL [https://devdocs.magento.com/guides/v2.3/install-gde/prereq/mysql.html]()
+- Magento 2 - Get your authentication keys [https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html]()
 
 ## TO DO
 -[ ] add dependencies 
