@@ -13,21 +13,46 @@
       - name: MAGENTO 2.3 COMMUNITY - create Magento 2.3 project via Composer
         command: /usr/local/bin/composer create-project --repository=https://repo.magento.com/ magento/project-community-edition {{ magento_docroot }}
 
-      - name: MAGENTO 2.3 COMMUNITY - copy reinstall script /var/www/html/reinstall.sh
+      - name: MAGENTO 2.3 COMMUNITY - copy reinstall script {{magento_docroot}}/reinstall.sh
         template:
           src: var/www/html/reinstall.sh.j2
-          dest: /var/www/html/reinstall.sh
-          owner: '{{magento_www_user}}'
-          group: '{{magento_www_group}}'
-          mode: 0664
+          dest: '{{magento_docroot}}/reinstall.sh'
+          owner: '{{magento_owner}}'
+          group: '{{magento_owner_group}}'
+          mode: 0774
 
-      - name: MAGENTO 2.3 COMMUNITY - make bin/magento executable
-        command: 'chmod u+x {{magento_docroot}}/bin/magento'
+      - name: MAGENTO 2.3 COMMUNITY - install
+        shell: '{{magento_docroot}}/reinstall.sh'
+
+      - name: MAGENTO 2.3 COMMUNITY - install cron
+        command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento cron:install'
+        become: yes
+        become_user: {{magento_owner}}
+
+      - name: MAGENTO 2.3 COMMUNITY - turn caching on
+        command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento cache:enable'
+
+      - name: MAGENTO 2.3 COMMUNITY - set deploy mode
+        command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento deploy:mode:set {{magento_deploy_mode}}'
     when: magento_index_result.stat.exists == false
 
-#  - yum:
-#      name: http://widehat.opensuse.org/opensuse/distribution/leap/42.3/repo/oss/suse/noarch/python-pexpect-3.3-6.1.noarch.rpm
-#      state: present
-#  - yum:
-#      name: python-pexpect
-#      state: present
+
+#  - name: MAGENTO 2.3 COMMUNITY - copy reinstall script {{magento_docroot}}/reinstall.sh
+#    template:
+#      src: var/www/html/reinstall.sh.j2
+#      dest: '{{magento_docroot}}/reinstall.sh'
+#      owner: '{{magento_owner}}'
+#      group: '{{magento_owner_group}}'
+#      mode: 0774
+#
+#  - name: MAGENTO 2.3 COMMUNITY - install
+#    shell: '{{magento_docroot}}/reinstall.sh'
+
+#  - name: MAGENTO 2.3 COMMUNITY - cache flush
+#    command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento cache:flush'
+
+# [ ] Optionally set a umask
+# [ ] set smtp
+# [ ] set store transactionl emails
+
+

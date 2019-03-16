@@ -3,13 +3,22 @@ Ansible role for Magento 2.3 Community
 
 ## What's inside?
 1. Magento 2.3 Community installator
+    - Frontend: http://webapp/
+    - Backend: http://webapp/admin (default admin user: `admin`, password: `Admin12`)
 2. MySQL database
-    - host: vagrant machine ip (192.168.33.10)
+    - host: vagrant machine ip
     - port: default (3306)
     - db name: magento
     - user: magento
     - password: magento
-2. Custom settings as per `defaults/main.yml`
+3. Custom settings as per `defaults/main.yml`
+4. Logs
+    - <webroot>/var/log/connector.log
+    - <webroot>/var/log/debug.log
+    - <webroot>/var/log/magento.cron.log
+    - <webroot>/var/log/setup.cron.log
+    - <webroot>/var/log/system.log
+    - <webroot>/var/log/update.cron.log
    
 ## Tested on
 
@@ -59,6 +68,10 @@ Ansible role for Magento 2.3 Community
         | GRANT ALL PRIVILEGES ON `magento`.* TO 'magento'@'localhost' |
         +--------------------------------------------------------------+
         ```
+8. To verify that Redis and Magento are working together follow instructions from 
+[https://devdocs.magento.com/guides/v2.3/config-guide/redis/redis-session.html]()
+9. Login to admin panel
+10. Change your password 
 
 ## PhpStorm configuration
 1. Add new datasource - MySQL
@@ -84,6 +97,10 @@ Ansible role for Magento 2.3 Community
 
 ## TO DO
 -[ ] add dependencies 
+-[ ] test production mode
+-[ ] get apache user automatically, not hardcoded
+-[ ] check performane of Redis connected with socket 
+-[ ] cronjob writes to system.log all the time 
 
 ## License
 Copyright (c) We Are Interactive under the MIT license.

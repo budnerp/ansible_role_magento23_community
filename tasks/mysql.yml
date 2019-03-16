@@ -1,23 +1,22 @@
 ---
-  - name: MAGENTO 2.3 COMMUNITY - create a new database with name '{{magento_database_name}}'
+  - name: MAGENTO 2.3 COMMUNITY - create a new database with name '{{magento_db_name}}'
     mysql_db:
-      name: '{{magento_database_name}}'
+      name: '{{magento_db_name}}'
       state: present
 
-  - name: MAGENTO 2.3 COMMUNITY - create '{{magento_user_name}}' user for '{{magento_database_name}}' database
+  - name: MAGENTO 2.3 COMMUNITY - create '{{magento_db_user}}' user for '{{magento_db_name}}' database
     mysql_user:
-      name: '{{magento_user_name}}'
-      password: '{{magento_user_password}}'
+      name: '{{magento_db_user}}'
+      password: '{{magento_db_password}}'
       host: '{{item}}'
-      priv: '{{magento_database_name}}.*:ALL'
+      priv: '{{magento_db_name}}.*:ALL'
       state: present
     with_items:
       - "{{ansible_nodename}}"
-      - "{{magento_user_host_ip}}"
+      - "{{magento_db_host}}"
       - localhost
       - 127.0.0.1
       - ::1
       - "%"
 
-#  - debug: msg="{{magento_user_host_ip}}"
 #  - debug: msg="{{ansible_nodename}}"
