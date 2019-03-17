@@ -5,11 +5,12 @@ magento_public_key: 'dd8f9291879fdc1fed7da25900a30bb3'
 magento_private_key: '05543f3c038be5b2f2697a30735cfbd6'
 
 # Hostname under Magento will be
-magento_server_name: '{{ansible_nodename}}'
+#magento_server_name: '{{ansible_nodename}}'
+magento_server_name: 'magento23ce.local'
 
 # Magento docroot
-# On Apache servers most likely it's /var/www/html
-magento_docroot: '/var/www/html'
+# On Apache servers default docroot most likely is /var/www/html
+magento_docroot: '/var/www/magento23ce.local/html'
 
 # for CentOS 7 Apache it most likely will be apache:apache
 magento_owner: 'apache'
@@ -52,10 +53,9 @@ magento_use_secure_admin: '0'
 magento_admin_use_security_key: '0'
 magento_cleanup_database: '--cleanup-database'
 magento_verbosity: '-vv'
+# Adde sample data before install
 magento_sampledata_install: '0'
-
-# Magento mode
-# Can be either developer or production
+# Magento mode. Can be either developer or production
 magento_deploy_mode: 'developer'
 
 # Use Redis for session storage

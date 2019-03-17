@@ -2,25 +2,31 @@
 Ansible role for Magento 2.3 Community
 
 ## What's inside?
-1. Magento 2.3 Community installator
-    - Frontend: http://webapp/
-    - Backend: http://webapp/admin (default admin user: `admin`, password: `Admin12`)
+1. Magento 2.3 Community
+    - Frontend: http://magento23ce.local/
+    - Backend: http://magento23ce.local/admin (default admin user: `admin`, password: `Admin12`)
 2. MySQL database
-    - host: vagrant machine ip
+    - host: vagrant machine's ip
     - port: default (3306)
-    - db name: magento
-    - user: magento
-    - password: magento
-3. Custom settings as per `defaults/main.yml`
-4. Logs
-    - <webroot>/var/log/connector.log
-    - <webroot>/var/log/debug.log
-    - <webroot>/var/log/magento.cron.log
-    - <webroot>/var/log/setup.cron.log
-    - <webroot>/var/log/system.log
-    - <webroot>/var/log/update.cron.log
+    - db name: `magento`
+    - user: `magento`
+    - password: `magento`
+3. Use of Redis databases: 0, 1 and 2 (page cache, backed cache, sessions)
+4. Sample data (not installed by default)
+5. Custom settings as per `defaults/main.yml`
+6. vhost
+    - server name `magento23ce.local`
+    - docroot: `/var/www/magento23ce.local/html/`
+5. Logs located in docroot:
+    - var/log/connector.log
+    - var/log/debug.log
+    - var/log/magento.cron.log
+    - var/log/setup.cron.log
+    - var/log/system.log
+    - var/log/update.cron.log
    
 ## Tested on
+- Virtual Box 6.0.4, Vagrant 2.2.3, Ansible 2.7.6, ContOS 7 build 1812.01
 
 ## Installation
 1. Navigate to Ansible's roles folder
@@ -35,12 +41,16 @@ Ansible role for Magento 2.3 Community
         - ansible_role_magento23_community
     [...]
     ```
-4. Provision your machine
-5. SSH onto the machine
+4. Set a domain in your hosts file (add a line in C:\Windows\System32\drivers\etc\hosts). Refer to Vagrantfile's web.vm.hostname configuration. Example:
+    ```
+    192.168.33.10 magento23ce.local
+    ```
+5. Provision your machine
+6. SSH onto the machine
     ```
     vagrant ssh
     ```
-6. Login to mysql console (see ansible_role_mysql's [README.md](https://github.com/budnerp/ansible_role_mysql/blob/master/README.md))
+7. Login to mysql console (see ansible_role_mysql's [README.md](https://github.com/budnerp/ansible_role_mysql/blob/master/README.md))
     ```
     mysql -u root -p
     ```
@@ -48,7 +58,7 @@ Ansible role for Magento 2.3 Community
     ```
     mysql -u magento -p 
     ```
-7. Validate
+8. Validate
     - existence of `magento` user
         ```
         SELECT User FROM mysql.user;
@@ -68,10 +78,10 @@ Ansible role for Magento 2.3 Community
         | GRANT ALL PRIVILEGES ON `magento`.* TO 'magento'@'localhost' |
         +--------------------------------------------------------------+
         ```
-8. To verify that Redis and Magento are working together follow instructions from 
+9. To verify that Redis and Magento are working together follow instructions from 
 [https://devdocs.magento.com/guides/v2.3/config-guide/redis/redis-session.html]()
-9. Login to admin panel
-10. Change your password 
+10. Login to admin panel
+11. Change your password 
 
 ## PhpStorm configuration
 1. Add new datasource - MySQL
