@@ -13,6 +13,18 @@
       - name: MAGENTO 2.3 COMMUNITY - create Magento 2.3 project via Composer
         command: /usr/local/bin/composer create-project --repository=https://repo.magento.com/ magento/project-community-edition {{ magento_docroot }}
 
+      - name: MAGENTO 2.3 COMMUNITY - copy auth.json {{magento_docroot}}/auth.json
+        template:
+          src: var/www/html/auth.json.j2
+          dest: '{{magento_docroot}}/auth.json'
+          owner: '{{magento_owner}}'
+          group: '{{magento_owner_group}}'
+          mode: 0664
+
+      - name: MAGENTO 2.3 COMMUNITY - add sample data
+        command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento sampledata:deploy'
+        when: magento_sampledata_install == '1' and magento_deploy_mode == 'developer'
+
       - name: MAGENTO 2.3 COMMUNITY - copy reinstall script {{magento_docroot}}/reinstall.sh
         template:
           src: var/www/html/reinstall.sh.j2
@@ -27,7 +39,7 @@
       - name: MAGENTO 2.3 COMMUNITY - install cron
         command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento cron:install'
         become: yes
-        become_user: {{magento_owner}}
+        become_user: '{{magento_owner}}'
 
       - name: MAGENTO 2.3 COMMUNITY - turn caching on
         command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento cache:enable'
@@ -35,3 +47,21 @@
       - name: MAGENTO 2.3 COMMUNITY - set deploy mode
         command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento deploy:mode:set {{magento_deploy_mode}}'
     when: magento_index_result.stat.exists == false
+
+
+
+#  - name: MAGENTO 2.3 COMMUNITY - set repository global config using Composer
+#    command: composer global config http-basic.repo.magento.com "{{ magento_public_key }}" "{{ magento_private_key }}"
+#    no_log: true
+#
+#  - name: MAGENTO 2.3 COMMUNITY - copy auth.json {{magento_docroot}}/auth.json
+#    template:
+#      src: var/www/html/auth.json.j2
+#      dest: '{{magento_docroot}}/auth.json'
+#      owner: '{{magento_owner}}'
+#      group: '{{magento_owner_group}}'
+#      mode: 0664
+#
+#  - name: MAGENTO 2.3 COMMUNITY - add sample data
+#    command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento sampledata:deploy'
+#    when: magento_sampledata_install == '1' and magento_deploy_mode == 'developer'

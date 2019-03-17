@@ -52,6 +52,7 @@ magento_use_secure_admin: '0'
 magento_admin_use_security_key: '0'
 magento_cleanup_database: '--cleanup-database'
 magento_verbosity: '-vv'
+magento_sampledata_install: '0'
 
 # Magento mode
 # Can be either developer or production
