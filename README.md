@@ -101,6 +101,9 @@ Ansible role for Magento 2.3 Community
 -[ ] get apache user automatically, not hardcoded
 -[ ] check performane of Redis connected with socket 
 -[ ] cronjob writes to system.log all the time 
+-[ ] Optionally set a umask
+-[ ] set smtp
+-[ ] set store transactionl emails
 
 ## License
 Copyright (c) We Are Interactive under the MIT license.

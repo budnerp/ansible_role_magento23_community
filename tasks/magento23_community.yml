@@ -35,24 +35,3 @@
       - name: MAGENTO 2.3 COMMUNITY - set deploy mode
         command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento deploy:mode:set {{magento_deploy_mode}}'
     when: magento_index_result.stat.exists == false
-
-
-#  - name: MAGENTO 2.3 COMMUNITY - copy reinstall script {{magento_docroot}}/reinstall.sh
-#    template:
-#      src: var/www/html/reinstall.sh.j2
-#      dest: '{{magento_docroot}}/reinstall.sh'
-#      owner: '{{magento_owner}}'
-#      group: '{{magento_owner_group}}'
-#      mode: 0774
-#
-#  - name: MAGENTO 2.3 COMMUNITY - install
-#    shell: '{{magento_docroot}}/reinstall.sh'
-
-#  - name: MAGENTO 2.3 COMMUNITY - cache flush
-#    command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento cache:flush'
-
-# [ ] Optionally set a umask
-# [ ] set smtp
-# [ ] set store transactionl emails
-
-
