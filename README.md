@@ -83,6 +83,11 @@ Ansible role for Magento 2.3 Community
 10. Login to admin panel
 11. Change your password 
 
+## Tuning
+To increase memory_limit change memory_limit values in 
+- `.htaccess` and `pub/.htaccess` (for both php versions)
+- `.user.ini` and `pub/.user.ini` 
+
 ## PhpStorm configuration
 1. Add new datasource - MySQL
 2. Provide all mandatory fields on `General` tab:
@@ -104,6 +109,16 @@ Ansible role for Magento 2.3 Community
 - Magento 2 [https://devdocs.magento.com/#/individual-contributors]()
 - Magento 2 - MySQL [https://devdocs.magento.com/guides/v2.3/install-gde/prereq/mysql.html]()
 - Magento 2 - Get your authentication keys [https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html]()
+
+## Troubleshooting
+For `Unable to unserialize` issues like:
+```
+InvalidArgumentException: Unable to unserialize value, string is corrupted. in /var/www/magento23ce.local/html/vendor/magento/framework/Serialize/Serializer/Serialize.php:38 [...]
+```
+try to flush Redis databases:
+```
+redis-cli flushall
+```
 
 ## TO DO
 -[ ] add dependencies 

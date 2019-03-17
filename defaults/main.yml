@@ -53,10 +53,13 @@ magento_use_secure_admin: '0'
 magento_admin_use_security_key: '0'
 magento_cleanup_database: '--cleanup-database'
 magento_verbosity: '-vv'
-# Adde sample data before install
+# Add sample data before install
 magento_sampledata_install: '0'
 # Magento mode. Can be either developer or production
 magento_deploy_mode: 'developer'
+
+# PHP
+magento_php_memory_limit: '1536M'
 
 # Use Redis for session storage
 # Session can be saved as: files, db, redis
