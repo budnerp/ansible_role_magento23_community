@@ -111,22 +111,36 @@ To increase memory_limit change memory_limit values in
 - Magento 2 - Get your authentication keys [https://devdocs.magento.com/guides/v2.3/install-gde/prereq/connect-auth.html]()
 
 ## Troubleshooting
-For `Unable to unserialize` issues like:
+####`Unable to unserialize` issues when sample data installed:
 ```
 InvalidArgumentException: Unable to unserialize value, string is corrupted. in /var/www/magento23ce.local/html/vendor/magento/framework/Serialize/Serializer/Serialize.php:38 [...]
 ```
-try to flush Redis databases:
+Try to flush Redis databases:
 ```
 redis-cli flushall
 ```
+Also refer to [https://magento.stackexchange.com/questions/194010/magento-2-2-unable-to-unserialize-value]()
+***Warning: issue still to be resolved!***
+
+####Corrupted CSS styles when sample data installed
+1. Navigate to Admin panel `Content` > `Configuration` > Store view `Edit` page
+2. Expand HTML Head section and update `Scripts and Style Sheets` textarea:
+    ```
+    <link  rel="stylesheet" type="text/css"  media="all" href="{{MEDIA_URL}}styles.css" />
+    ```
+    ```
+    <link  rel="stylesheet" type="text/css"  media="all" href="pub/media/styles.css" />
+    ```
+3. Flush cashe if needed
 
 ## TO DO
 -[ ] add dependencies 
--[ ] test production mode
+-[x] test production
+-[ ] test production mode with sample data
 -[ ] get apache user automatically, not hardcoded
--[ ] check performane of Redis connected with socket 
+-[ ] check performance of Redis: connected through socket/tcp 
 -[ ] cronjob writes to system.log all the time 
--[ ] Optionally set a umask
+-[ ] set a umask
 -[ ] set smtp
 -[ ] set store transactionl emails
 
