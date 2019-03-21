@@ -14,8 +14,10 @@ Ansible role for Magento 2.3 Community
 3. Use of Redis databases: 0, 1 and 2 (page cache, backed cache, sessions)
 4. Sample data (not installed by default)
 5. Custom settings as per `defaults/main.yml`
-6. vhost
-    - server name `magento23ce.local`
+6. Host
+    - server name `magento23ce.local` 
+        - used for Magento installation
+        - set in `/etc/hosts` 
     - docroot: `/var/www/magento23ce.local/html/`
 5. Logs located in docroot:
     - var/log/connector.log

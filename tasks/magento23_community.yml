@@ -1,4 +1,15 @@
 ---
+  - name: MAGENTO 2.3 COMMUNITY - add {{magento_server_name}} do /etc/hosts
+    shell: 'grep -e "{{magento_server_name}}" /etc/hosts | wc -l'
+    register: check_hosts
+
+  - lineinfile:
+      dest: /etc/hosts
+      line: '{{ansible_eth1.ipv4.address}} {{magento_server_name}}'
+      owner: root
+      group: root
+    when: check_hosts.stdout == '0'
+
   - name: MAGENTO 2.3 COMMUNITY - check if Magento already exists
     stat:
       path: '{{magento_docroot}}/index.php'
