@@ -106,7 +106,30 @@ To increase memory_limit change memory_limit values in
     - Auth type: `key pair ...`
     - Private key file `~\.vagrant.d\insecure_private_key`
 4. Click `Test connection`, expect green `Successfull` label
-   
+
+## Siege - stress testing
+For use of stress testing of Magento, siege_urls.txt file is generated. The file consists of URLs for MAgento with 
+sample data. 
+
+To quickly generate list of URLs Magento Sitemap feature can be used.
+1. Generate site map in Admin panel
+    ```
+    Panel > Marketing > Site Map > Add Sitemap
+    ```
+2. Fetch url from generated XML file, eg.:
+    ```
+    cat /var/www/magento23ce.local/html/sitemap.xml | sed 's/\<url\>/\<url\>\n/g' | grep 0.5 | sed 's/.*loc>\(.*\)<\/loc.*/\1/g' > siege_urls.txt
+    cat /var/www/magento23ce.local/html/sitemap.xml | sed 's/\<url\>/\<url\>\n/g' | grep 1.0 | sed 's/.*loc>\(.*\)<\/loc.*/\1/g' > siege_urls.txt
+    ```
+3. Correct the file manually if needed.
+4. Run Siege
+    ```
+    siege -i -c25 -t30s -f /var/www/magento23ce.local/html/siege_urls.txt
+    ```
+Refer to [https://www.joedog.org/siege-manual/#a05]() for more info.
+
+Siege Ansible role is available under [https://github.com/budnerp/ansible_role_siege]() repository.
+
 ## Other links
 - Magento 2 [https://devdocs.magento.com/#/individual-contributors]()
 - Magento 2 - MySQL [https://devdocs.magento.com/guides/v2.3/install-gde/prereq/mysql.html]()
@@ -138,6 +161,7 @@ Also refer to [https://magento.stackexchange.com/questions/194010/magento-2-2-un
 ## TO DO
 -[ ] add dependencies 
 -[x] test production
+-[ ] test imagemagick performance
 -[ ] test production mode with sample data
 -[ ] get apache user automatically, not hardcoded
 -[ ] check performance of Redis: connected through socket/tcp 
