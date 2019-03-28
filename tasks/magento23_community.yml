@@ -69,6 +69,7 @@
         with_items:
           - 'cron:remove'
           - 'cron:install'
+        when: magento_cron_install == '1'
 
       - name: MAGENTO 2.3 COMMUNITY - turn caching on
         command: '{{magento_php_executable}} {{magento_docroot}}/bin/magento cache:enable'

@@ -52,6 +52,7 @@ magento_use_secure: '0'
 magento_use_secure_admin: '0'
 magento_admin_use_security_key: '0'
 magento_cleanup_database: '--cleanup-database'
+magento_cron_install: '1'
 magento_verbosity: '-vv'
 # Add sample data before install
 magento_sampledata_install: '0'
@@ -59,6 +60,8 @@ magento_sampledata_install: '0'
 magento_deploy_mode: 'developer'
 
 # PHP
+# Memory limit saved in .htaccess, .user.ini, pub/.htaccess, pub/.user.ini
+# These values can be overwritten by PHP and/or PHP-FPM settings
 magento_php_memory_limit: '1536M'
 
 # Use Redis for session storage
