@@ -89,6 +89,21 @@ Ansible role for Magento 2.3 Community
 To increase memory_limit change memory_limit values in 
 - `.htaccess` and `pub/.htaccess` (for both php versions)
 - `.user.ini` and `pub/.user.ini` 
+- use in-memory file system `tmpfs` for `generated`
+    ```
+    sudo mount -t tmpfs -o size=128m generated /var/www/magento23ce.local/html/generated
+    sudo mount -t tmpfs -o size=128m view_preprocessed /var/www/magento23ce.local/html/var/view_preprocessed
+    ```
+    Validate using `df -h`
+    To unmount:
+    ```
+    sudo umount generated
+    sudo umount view_preprocessed
+    ```
+- remove Magento cron. Magento crontab file belongs to `apache` user
+    ```
+    sudo crontab -u apache -r
+    ``` 
 
 ## PhpStorm configuration
 1. Add new datasource - MySQL
@@ -153,10 +168,11 @@ Also refer to [https://magento.stackexchange.com/questions/194010/magento-2-2-un
     ```
     <link  rel="stylesheet" type="text/css"  media="all" href="{{MEDIA_URL}}styles.css" />
     ```
+    with:
     ```
-    <link  rel="stylesheet" type="text/css"  media="all" href="pub/media/styles.css" />
+    <link  rel="stylesheet" type="text/css"  media="all" href="/pub/media/styles.css" />
     ```
-3. Flush cashe if needed
+3. Flush cache if needed
 
 ## TO DO
 -[ ] add dependencies 
