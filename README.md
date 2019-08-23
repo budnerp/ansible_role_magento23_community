@@ -175,6 +175,9 @@ Also refer to [https://magento.stackexchange.com/questions/194010/magento-2-2-un
 3. Flush cache if needed
 
 ## TO DO
+-[ ] Hyper-V bug:
+TASK [ansible_role_magento23_community : lineinfile] ***************************
+fatal: [webapp]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'ansible_eth1' is undefined\n\nThe error appears to be in '/vagrant/provisioning/roles/ansible_role_magento23_community/tasks/magento23_community.yml': line 6, column 5, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n  - lineinfile:\n    ^ here\n"} 
 -[ ] add dependencies 
 -[x] test production
 -[ ] test imagemagick performance
